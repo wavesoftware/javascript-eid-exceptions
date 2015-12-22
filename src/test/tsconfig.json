@@ -1,0 +1,29 @@
+{
+    "compileOnSave": true,
+    "filesGlob": [
+        "ts/**/*.{ts,tsx}",
+        "../../target/typings/**/*.*.ts"
+    ],
+    "compilerOptions": {
+        "jsx": "preserve",
+        "target": "es6",
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "suppressImplicitAnyIndexErrors": true,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outDir": "../../target/js-test-sources",
+        "sourceRoot": "ts",
+        "declaration": true
+    },
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    },
+    "files": [
+        "ts/eid.test.ts",
+        "../../target/typings/jasmine/jasmine.d.ts",
+        "../../target/typings/tsd.d.ts"
+    ]
+}
