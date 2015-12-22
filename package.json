@@ -1,0 +1,32 @@
+{
+  "name": "eid-exceptions",
+  "version": "0.1.0",
+  "description": "EID Runtime Exceptions and Utilities for JavaScript",
+  "babel": {},
+  "main": "eid.js",
+  "scripts": {
+    "test": "src/test/javascript/all.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wavesoftware/javascript-eid-exceptions.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "keywords": [
+    "exception",
+    "errorcodes",
+    "error",
+    "handling"
+  ],
+  "author": "Krzysztof Suszyński",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wavesoftware/javascript-eid-exceptions/issues"
+  },
+  "homepage": "https://github.com/wavesoftware/javascript-eid-exceptions"
+}
