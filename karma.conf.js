@@ -10,7 +10,8 @@ module.exports = function(config) {
 
     files: [
       'src/test/ts/import-babel-polyfill.js', // This ensures we have the es6 shims in place from babel
-      'src/test/ts/**/*.{ts,tsx}'
+      'src/test/ts/**/*.ts',
+      'src/test/ts/**/*.tsx'
     ],
 
     port: 9876,
@@ -24,6 +25,8 @@ module.exports = function(config) {
       'src/main/ts/**/*.{ts,tsx}': [ 'webpack', 'sourcemap' ],
       'src/test/ts/**/*.{ts,tsx}': [ 'webpack', 'sourcemap' ]
     },
+
+    reporters: [ 'mocha', 'junit', 'coverage' ],
 
     webpack: {
       devtool: 'eval-source-map', //'inline-source-map',

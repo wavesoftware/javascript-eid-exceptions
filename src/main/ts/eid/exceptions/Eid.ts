@@ -73,11 +73,20 @@ export default class Eid {
     this.ref = ref;
   }
 
-  toString() {
+  public toString() : string {
       if ("" === this.ref || null === this.ref) {
           return StringFormatter.format(Eid.format, this.id, this.uniq);
       }
       return StringFormatter.format(Eid.refFormat, this.id, this.ref, this.uniq);
+  }
+
+  public static setUniqIdGenerator(uniqIdGenerator : UniqIdGenerator) : UniqIdGenerator {
+    if (uniqIdGenerator == null) {
+      throw new TypeError("Unique ID generator can't be null, but given one");
+    }
+    var previous : UniqIdGenerator = Eid.uniqIdGenerator;
+    Eid.uniqIdGenerator = uniqIdGenerator;
+    return previous;
   }
 
 }

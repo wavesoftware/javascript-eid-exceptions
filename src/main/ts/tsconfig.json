@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "noImplicitAny": false,
+    "removeComments": false,
+    "preserveConstEnums": true
+  },
+  "filesGlob": [
+    "../typings/**/*.ts",
+    "**/*.ts"
+  ],
+  "files": [],
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

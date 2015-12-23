@@ -11,7 +11,7 @@ function run(done) {
       done();
     }
     else {
-      del(['./target'], { force: true })
+      del(['./target/**', './target'], { force: true })
         .then(function(paths) {
           gutil.log('Deleted files/folders:\n', paths.join('\n'));
           done();
