@@ -5,7 +5,7 @@
   "babel": {},
   "main": "eid.js",
   "scripts": {
-    "test": "node_modules/.bin/gulp test",
+    "test": "node_modules/.bin/gulp build test",
     "serve": "node_modules/.bin/gulp serve",
     "watch": "node_modules/.bin/gulp watch",
     "build": "node_modules/.bin/gulp build"
