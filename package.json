@@ -5,7 +5,9 @@
   "babel": {},
   "main": "eid.js",
   "scripts": {
-    "test": "karma start --reporters mocha,junit --single-run --browsers PhantomJS",
+    "test": "node_modules/.bin/gulp test",
+    "serve": "node_modules/.bin/gulp serve",
+    "watch": "node_modules/.bin/gulp watch",
     "build": "node_modules/.bin/gulp build"
   },
   "repository": {

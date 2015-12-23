@@ -14,7 +14,11 @@ var karma = require('karma');
 
 var lintSrcs = ['./src/gulp/**/*.js'];
 
-gulp.task('clean', function (done) {
+gulp.task('clean-webpack', function (done) {
+  clean.runOnWebPack(done);
+});
+
+gulp.task('clean', ['clean-webpack'], function (done) {
   clean.run(done);
 });
 
@@ -22,7 +26,7 @@ gulp.task('build-process.env.NODE_ENV', function () {
   process.env.NODE_ENV = 'production';
 });
 
-gulp.task('build-js', ['build-process.env.NODE_ENV'], function(done) {
+gulp.task('build-js', ['clean-webpack', 'build-process.env.NODE_ENV'], function(done) {
   webpack.build().then(function() { done(); });
 });
 
@@ -55,3 +59,5 @@ gulp.task('serve', ['watch'], function() {
     port: 8080
   });
 });
+
+gulp.task('default', ['build', 'test']);

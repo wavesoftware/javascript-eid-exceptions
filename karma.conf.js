@@ -26,10 +26,10 @@ module.exports = function(config) {
       'src/test/ts/**/*.{ts,tsx}': [ 'webpack', 'sourcemap' ]
     },
 
-    reporters: [ 'mocha', 'junit', 'coverage' ],
+    reporters: [ 'mocha', 'junit'/*, 'coverage'*/ ],
 
     webpack: {
-      devtool: 'eval-source-map', //'inline-source-map',
+      devtool: 'inline-source-map', //'inline-source-map',
       debug: true,
       module: webpackConfig.module,
       resolve: webpackConfig.resolve
@@ -45,23 +45,23 @@ module.exports = function(config) {
     // reporter options
     mochaReporter: {
       colors: {
-        success: 'bgGreen',
-        info: 'cyan',
-        warning: 'bgBlue',
-        error: 'bgRed'
+        success: 'green',
+        info: 'grey',
+        warning: 'yellow',
+        error: 'red'
       }
     },
 
     // the default configuration
     junitReporter: {
-      outputDir: 'test-results', // results will be saved as $outputDir/$browserName.xml
+      outputDir: 'target/junit-results', // results will be saved as $outputDir/$browserName.xml
       outputFile: undefined, // if included, results will be saved as $outputDir/$browserName/$outputFile
       suite: ''
     },
 
     coverageReporter: {
       reporters:[
-        {type: 'html', dir:'target/coverage/'},  // https://github.com/karma-runner/karma-coverage/issues/123
+        {type: 'html', dir:'target/coverage'},  // https://github.com/karma-runner/karma-coverage/issues/123
         {type: 'text'},
         {type: 'text-summary'}
       ],

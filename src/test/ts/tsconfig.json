@@ -3,7 +3,8 @@
     "target": "es6",
     "noImplicitAny": false,
     "removeComments": false,
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "outDir": "../../../target/js"
   },
   "filesGlob": [
     "../../main/ts/**/*.{ts,tsx}",
