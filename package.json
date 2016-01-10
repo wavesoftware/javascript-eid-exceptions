@@ -1,0 +1,34 @@
+{
+  "name": "eid.js",
+  "version": "1.0.0",
+  "description": "EID Runtime Exceptions and Utilities for JS",
+  "main": "lib/eid.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "gulp-eslint": "^1.1.1"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wavesoftware/javascript-eid-exceptions.git"
+  },
+  "keywords": [
+    "debug",
+    "expection",
+    "preconditions",
+    "quality",
+    "qa"
+  ],
+  "author": "Krzysztof Suszynski <krzysztof.suszynski@wavesoftware.pl>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wavesoftware/javascript-eid-exceptions/issues"
+  },
+  "homepage": "https://github.com/wavesoftware/javascript-eid-exceptions#readme"
+}
