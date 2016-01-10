@@ -4,12 +4,22 @@
   "description": "EID Runtime Exceptions and Utilities for JS",
   "main": "lib/eid.js",
   "directories": {
-    "test": "test"
+    "test": "./node_modules/.bin/gulp"
   },
   "dependencies": {},
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "gulp-eslint": "^1.1.1"
+    "globby": "^4.0.0",
+    "gulp": "^3.9.0",
+    "gulp-coverage": "^0.3.38",
+    "gulp-eslint": "^1.1.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
     "test": "gulp test"
