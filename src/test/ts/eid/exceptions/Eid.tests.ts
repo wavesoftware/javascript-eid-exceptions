@@ -23,7 +23,7 @@ describe('eid.exceptions.Eid', () => {
       // when
       var replaced = Eid.setUniqIdGenerator(Eid.DEFAULT_UNIQ_ID_GENERATOR);
       // then
-      expect(replaced).toEqual(generator);
+      expect(replaced).toBe(generator);
       expect(replaced.generateUniqId()).toEqual("constant");
     });
   });
