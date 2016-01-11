@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ExceptionID.js - manual test page</title>
+    <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/twbs/bootstrap/master/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script type="application/javascript" src="browser/toplevel/eid.min.js"></script>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=PT+Sans|Source+Code+Pro);
+      body {
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1.3em;
+        padding: 1em;
+      }
+      pre, code {
+        font-family: 'Source Code Pro', monospace;
+      }
+      pre#console {
+        display:block;
+        font:normal 1em/1.5em 'Source Code Pro', monospace;
+        color: #CFDBEC;
+        background-color:#2f2f2f;
+        background-image:-webkit-repeating-linear-gradient(top, #353535 0em, #353535 1.5em, #2f2f2f 1.5em, #2f2f2f 3em);
+        background-image:-moz-repeating-linear-gradient(top, #353535 0em, #353535 1.5em, #2f2f2f 1.5em, #2f2f2f 3em);
+        background-image:-ms-repeating-linear-gradient(top, #353535 0em, #353535 1.5em, #2f2f2f 1.5em, #2f2f2f 3em);
+        background-image:-o-repeating-linear-gradient(top, #353535 0em, #353535 1.5em, #2f2f2f 1.5em, #2f2f2f 3em);
+        background-image:repeating-linear-gradient(top, #353535 0em, #353535 1.5em, #2f2f2f 1.5em, #2f2f2f 3em);
+        padding:0em 1em;
+        overflow:auto;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ExceptionID.js - showcase</h1>
+
+    <h3>Code:</h3>
+    <pre><code class="javascript" id="code">
+    try {
+      // Example entity objects
+      var users = [];
+      for (var i = 0; i < 5; i++) {
+        var user = { id: 67112 - i };
+        user.toString = function() { return '[User id=' + this.id + ']'; };
+        users.push(user);
+      }
+
+      // logging support
+      for (var i = 0; i < users.length; i++) {
+        var user = users[i];
+        var eid = new Eid('20160111:223928', 'WJS-17');
+        log.debug(eid.makeLogMessage('An entity: %s', user));
+        log.debug(eid.makeLogMessage('%s has even ID: %s', user, user.id % 2 === 0));
+      }
+
+      // preconditions!
+      EidPreconditions.checkArgument(true, '20160111:223749');
+      EidPreconditions.checkState(false, '20160111:224215', 'A extra message');
+    } catch(e) {
+      // Top level of your application
+      log.error(e.toString() + ' - ' + e.stack);
+      // or better save your exceptions!
+      logGateway.put(e, {eid: e.eid});
+    }
+    </code></pre>
+    <h3>Console:</h3>
+    <pre id="console"></pre>
+    <script type="application/javascript">
+    (function() {
+    var line = 1;
+    function pad(n, width, z) {
+      z = z || '0';
+      n = n + '';
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+    var println = function(message) {
+      var pre = document.getElementById('console');
+      pre.textContent += message + "\n";
+    };
+    var logentry = function(level, msg) {
+      var date = new Date().toISOString().slice(0, 23);
+      println(pad(line, 3) + ': ' + level + ' ' + date + ' ' + msg);
+      line += 1;
+    };
+    var log = {
+      debug: function(message) {
+        logentry('DEBUG', message);
+      },
+      error: function(message) {
+        logentry('ERROR', message);
+      }
+    };
+    var logGateway = {
+      put: function(ex, extra) {
+        logentry('INFO', 'LogzGetewayFake.io sucessfully PUT an exception: `' + ex.toString() + '` with extra data of: `' + JSON.stringify(extra) + '`');
+      }
+    };
+    var code = document.getElementById('code').textContent;
+    eval(code);
+    hljs.initHighlightingOnLoad();
+    })();
+    </script>
+  </body>
+</html>
