@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var eslint = require('gulp-eslint');
 var mocha = require('gulp-mocha');
 var cover = require('gulp-coverage');
+var coveralls = require('gulp-coveralls');
 var config = require('./config');
 
 module.exports = {
@@ -58,6 +59,7 @@ module.exports = {
         { reporter: 'json', outFile: 'coverage.json' },
         { reporter: 'lcov', outFile: 'coverage.lcov' },
       ]))
+      .pipe(coveralls())
       .pipe(gulp.dest('reports'))
       .on('end', function() {
         process.chdir(pwd);
