@@ -14,5 +14,6 @@ module.exports = {
   lib: directory.lib,
   test: directory.test,
   target: directory.target,
-  dist: directory.dist
+  dist: directory.dist,
+  ceverageMin: 98
 };

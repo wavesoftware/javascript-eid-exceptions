@@ -42,25 +42,32 @@ module.exports = {
     process.chdir(target);
     var testSrc = prependToAll('..', config.testSources);
     var src = prependToAll('..', config.sources);
-    return gulp.src(testSrc, { read: false })
+    var stream = gulp.src(testSrc, { read: false })
       .pipe(cover.instrument({
         pattern: src,
         debugDirectory: 'debug'
       }))
       .pipe(mocha())
-      .pipe(cover.gather())
-      .pipe(cover.enforce({
-        statements: 98,
-        blocks: 98,
-        lines: 98,
+      .pipe(cover.gather());
+
+    if (process.env.TRAVIS == 'true') {
+      stream = stream.pipe(cover.format([
+          { reporter: 'lcov' }
+        ]))
+        .pipe(coveralls());
+    } else {
+      stream = stream.pipe(cover.format([
+          { reporter: 'html' },
+          { reporter: 'json' },
+          { reporter: 'lcov' }
+        ]))
+        .pipe(gulp.dest('reports'));
+    }
+    return stream.pipe(cover.enforce({
+        statements: config.ceverageMin,
+        blocks: config.ceverageMin,
+        lines: config.ceverageMin,
       }))
-      .pipe(cover.format([
-        { reporter: 'html', outFile: 'coverage.html' },
-        { reporter: 'json', outFile: 'coverage.json' },
-        { reporter: 'lcov', outFile: 'coverage.lcov' },
-      ]))
-      .pipe(coveralls())
-      .pipe(gulp.dest('reports'))
       .on('end', function() {
         process.chdir(pwd);
       });
