@@ -1,9 +1,25 @@
+/*
+ * Copyright 2016 Wave Software
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 var expect = require('expect.js');
 var EidRuntimeException =  require('../../lib/eid/exceptions').EidRuntimeException;
 var EidNullPointerException =  require('../../lib/eid/exceptions').EidNullPointerException;
 var EidIllegalArgumentException =  require('../../lib/eid/exceptions').EidIllegalArgumentException;
 var EidIllegalStateException =  require('../../lib/eid/exceptions').EidIllegalStateException;
-var EidIndexOfOfBoundsException =  require('../../lib/eid/exceptions').EidIndexOfOfBoundsException;
+var EidIndexOutOfBoundsException =  require('../../lib/eid/exceptions').EidIndexOutOfBoundsException;
 
 describe('EidRuntimeException', function() {
   var ex = new EidRuntimeException('20160110:230223', 'A null pointer occured!');
@@ -60,10 +76,10 @@ describe('EidIllegalStateException', function() {
   });
 });
 
-describe('EidIndexOfOfBoundsException', function() {
-  var ex = new EidIndexOfOfBoundsException('20160110:230140', 'A null pointer occured!');
+describe('EidIndexOutOfBoundsException', function() {
+  var ex = new EidIndexOutOfBoundsException('20160110:230140', 'A null pointer occured!');
   it('should contain proper message', function() {
-    expect(ex.toString()).to.match(/EidIndexOfOfBoundsException: \[20160110:230140\]\<[a-z0-9]+\> A null pointer occured!/);
+    expect(ex.toString()).to.match(/EidIndexOutOfBoundsException: \[20160110:230140\]\<[a-z0-9]+\> A null pointer occured!/);
   });
   it('should contain a stack trace', function() {
     expect(ex.stack).to.not.empty();
