@@ -16,7 +16,8 @@ module.exports = {
           strict: 2
         },
         env: {
-      		node: true
+      		node: true,
+          browser: true
       	}
       }))
       .pipe(eslint.format())
@@ -25,8 +26,9 @@ module.exports = {
   specs: function (done) {
     var prependToAll = function(path, globs) {
       var ret = [];
-      for (var v of globs) {
-        ret.push(path + '/' + v);
+      for (var i = 0; i < globs.length; i++) {
+        var value = globs[i];
+        ret.push(path + '/' + value);
       }
       return ret;
     };
