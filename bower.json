@@ -1,0 +1,29 @@
+{
+  "name": "eid.js",
+  "description": "EID Runtime Exceptions and Utilities for JS",
+  "main": "dist/browser/toplevel/eid.min.js",
+  "authors": [
+    "Krzysztof Suszynski <krzysztof.suszynski@wavesoftware.pl>"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "debug",
+    "expection",
+    "preconditions",
+    "quality",
+    "qa"
+  ],
+  "homepage": "https://github.com/wavesoftware/javascript-eid-exceptions",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gulp",
+    "target"
+  ]
+}

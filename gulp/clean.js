@@ -22,5 +22,4 @@ var deleteFolderRecursive = function(path) {
 
 module.exports = function() {
   deleteFolderRecursive(config.target);
-  deleteFolderRecursive(config.dist);
 };
