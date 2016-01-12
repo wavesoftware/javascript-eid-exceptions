@@ -4,4 +4,4 @@
 var serve = require('gulp-serve');
 var config = require('./config');
 
-module.exports = serve([ config.test, config.dist ]);
+module.exports = serve(config.dist + '/browser');
