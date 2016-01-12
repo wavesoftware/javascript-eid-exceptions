@@ -16,12 +16,5 @@
 
 (function(wnd) {
   'use strict';
-
   wnd.Eid = require('../../lib/eid');
-  wnd.EidNullPointerException = require('../../lib/eid/exceptions').EidNullPointerException;
-  wnd.EidIllegalArgumentException = require('../../lib/eid/exceptions').EidIllegalArgumentException;
-  wnd.EidIllegalStateException = require('../../lib/eid/exceptions').EidIllegalStateException;
-  wnd.EidIndexOutOfBoundsException = require('../../lib/eid/exceptions').EidIndexOutOfBoundsException;
-  wnd.EidRuntimeException = require('../../lib/eid/exceptions').EidRuntimeException;
-  wnd.EidPreconditions = require('../../lib/eid/preconditions');
 })(window);

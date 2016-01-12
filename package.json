@@ -1,6 +1,6 @@
 {
   "name": "eid.js",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "EID Runtime Exceptions and Utilities for JS",
   "main": "lib/eid.js",
   "directories": {
@@ -27,7 +27,8 @@
   "scripts": {
     "clean": "gulp clean",
     "test": "gulp test",
-    "build": "gulp build"
+    "build": "gulp build",
+    "serve": "gulp serve"
   },
   "repository": {
     "type": "git",

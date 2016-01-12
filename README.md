@@ -64,10 +64,10 @@ Each example uses static import:
 
 ```js
 // nodejs
-var EidPreconditions = require('eid/preconditions');
+var EidPreconditions = require('eid.js').preconditions;
 
 // browser using bower using toplevel version
-window.EidPreconditions;
+var EidPreconditions = window.Eid.preconditions;
 ```
 
 #### `checkArgument` method
