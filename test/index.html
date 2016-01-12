@@ -56,6 +56,7 @@
       }
 
       // preconditions!
+      var EidPreconditions = Eid.preconditions;
       EidPreconditions.checkArgument(true, '20160111:223749');
       EidPreconditions.checkState(false, '20160111:224215', 'A extra message');
     } catch(e) {
