@@ -118,7 +118,7 @@ describe('Eid', function() {
 
   describe('.DEFAULT_UNIQ_ID_GENERATOR', function() {
     it('should be instance of UniqIdGenerator', function() {
-      expect(Eid.DEFAULT_UNIQ_ID_GENERATOR.generateUniqId()).to.match(/^[a-z0-9]{5,6}$/);
+      expect(Eid.DEFAULT_UNIQ_ID_GENERATOR.generateUniqId()).to.match(/^[a-z0-9]{6}$/);
     });
   });
 
@@ -126,13 +126,13 @@ describe('Eid', function() {
     describe('without ref number', function() {
       var subject = new Eid('20160110:214452');
       it('should print object with eid and uniq id', function() {
-        expect(subject.toString()).to.match(/^\[20160110:214452]\<[a-z0-9]{5,6}\>$/);
+        expect(subject.toString()).to.match(/^\[20160110:214452]\<[a-z0-9]{6}\>$/);
       });
     });
     describe('with ref number', function() {
       var subject = new Eid('20160110:214944', 'ORA-1029');
       it('should print object with eid, ref and uniq id', function() {
-        expect(subject.toString()).to.match(/^\[20160110:214944\|ORA-1029\]\<[a-z0-9]{5,6}\>$/);
+        expect(subject.toString()).to.match(/^\[20160110:214944\|ORA-1029\]\<[a-z0-9]{6}\>$/);
       });
     });
   });
@@ -145,7 +145,7 @@ describe('Eid', function() {
       return JSON.stringify(this);
     };
     it('should print log message as: [20160110:215138]<xxxxx> => My test object is: {"a":67}', function() {
-      expect(eid.makeLogMessage(messageFormat, testObject)).to.match(/^\[20160110:215138\]\<[a-z0-9]{5,6}\> => My test object is: {"a":67}$/);
+      expect(eid.makeLogMessage(messageFormat, testObject)).to.match(/^\[20160110:215138\]\<[a-z0-9]{6}\> => My test object is: {"a":67}$/);
     });
   });
 
@@ -163,7 +163,7 @@ describe('Eid', function() {
     });
     describe('#getUniq()', function() {
       it('should return xxxxxx as uniq id', function() {
-        expect(eid.getUniq()).to.match(/^[a-z0-9]{5,6}$/);
+        expect(eid.getUniq()).to.match(/^[a-z0-9]{6}$/);
       });
     });
   });
