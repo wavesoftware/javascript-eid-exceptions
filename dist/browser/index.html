@@ -38,6 +38,7 @@
 
     <h3>Code:</h3>
     <pre><code class="javascript" id="code">
+    var EidRuntimeException = Eid.exceptions.EidRuntimeException;
     try {
       // Example entity objects
       var users = [];
@@ -61,9 +62,11 @@
       EidPreconditions.checkState(false, '20160111:224215', 'A extra message');
     } catch(e) {
       // Top level of your application
-      log.error(e.toString() + ' - ' + e.stack);
-      // or better save your exceptions!
-      logGateway.put(e, {eid: e.eid});
+      log.error(e.stack);
+      if (e instanceof EidRuntimeException) {
+        // or better save your exceptions!
+        logGateway.put(e, {eid: e.eid});
+      }
     }
     </code></pre>
     <h3>Console:</h3>
@@ -95,7 +98,7 @@
     };
     var logGateway = {
       put: function(ex, extra) {
-        logentry('INFO', 'LogzGetewayFake.io sucessfully PUT an exception: `' + ex.toString() + '` with extra data of: `' + JSON.stringify(extra) + '`');
+        logentry('INFO', 'FakeLogz.io PUT an exception: `' + ex.toString() + '` with extra data of: `' + JSON.stringify(extra) + '`');
       }
     };
     var code = document.getElementById('code').textContent;
