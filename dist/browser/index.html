@@ -11,7 +11,7 @@
       @import url(https://fonts.googleapis.com/css?family=PT+Sans|Source+Code+Pro);
       body {
         font-family: 'PT Sans', sans-serif;
-        font-size: 1.3em;
+        font-size: 1em;
         padding: 1em;
       }
       pre, code {
@@ -65,7 +65,7 @@
       log.error(e.stack);
       if (e instanceof EidRuntimeException) {
         // or better save your exceptions!
-        logGateway.put(e, {eid: e.eid});
+        logGateway.put(e, inspectable({eid: e.eid}));
       }
     }
     </code></pre>
@@ -96,9 +96,21 @@
         logentry('ERROR', message);
       }
     };
+    var inspectable = function(obj) {
+      obj.toString = function() {
+        var parts = [];
+        for (var k in obj) {
+          if (obj.hasOwnProperty(k) && k !== 'toString') {
+            parts.push(k.toString() + ': ' + obj[k].toString());
+          }
+        }
+        return '{ ' + parts.join(', ') + ' }';
+      };
+      return obj;
+    };
     var logGateway = {
       put: function(ex, extra) {
-        logentry('INFO', 'FakeLogz.io PUT an exception: `' + ex.toString() + '` with extra data of: `' + JSON.stringify(extra) + '`');
+        logentry('INFO', 'FakeLogz.io PUT exception: `' + ex.toString() + '`, payload: `' + extra.toString() + '`');
       }
     };
     var code = document.getElementById('code').textContent;
