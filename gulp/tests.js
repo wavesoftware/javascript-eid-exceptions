@@ -44,8 +44,7 @@ module.exports = {
     var src = prependToAll('..', config.sources);
     var stream = gulp.src(testSrc, { read: false })
       .pipe(cover.instrument({
-        pattern: src,
-        debugDirectory: 'debug'
+        pattern: src
       }))
       .pipe(mocha())
       .pipe(cover.gather());

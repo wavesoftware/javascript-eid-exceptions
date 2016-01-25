@@ -32,6 +32,21 @@ describe('EidRuntimeException', function() {
   it('should inherits Error', function() {
     expect(ex instanceof Error).to.be.ok();
   });
+  it('should not inherits TypeError or other types of Eid*Exception', function() {
+    expect(ex instanceof TypeError).not.to.be.ok();
+    expect(ex instanceof EidIllegalStateException).not.to.be.ok();
+    expect(ex instanceof EidIllegalArgumentException).not.to.be.ok();
+    expect(ex instanceof EidIndexOutOfBoundsException).not.to.be.ok();
+    expect(ex instanceof EidNullPointerException).not.to.be.ok();
+  });
+  describe('construction without passing eid object', function() {
+    it('should fail with TypeError', function() {
+      expect(function() { new EidRuntimeException() }).to.throwException(function(e) {
+        expect(e.message).to.eql('You need to provide an valid Eid number to EidRuntimeExceptions, but given undefined');
+        expect(e).to.be.a(TypeError);
+      });
+    });
+  });
 });
 
 describe('EidNullPointerException', function() {
@@ -43,8 +58,15 @@ describe('EidNullPointerException', function() {
     expect(ex.stack).to.not.empty();
   });
   it('should inherits Error and EidRuntimeException', function() {
+    expect(ex instanceof EidNullPointerException).to.be.ok();
     expect(ex instanceof Error).to.be.ok();
     expect(ex instanceof EidRuntimeException).to.be.ok();
+  });
+  it('should not inherits TypeError or other types of Eid*Exception', function() {
+    expect(ex instanceof TypeError).not.to.be.ok();
+    expect(ex instanceof EidIllegalStateException).not.to.be.ok();
+    expect(ex instanceof EidIllegalArgumentException).not.to.be.ok();
+    expect(ex instanceof EidIndexOutOfBoundsException).not.to.be.ok();
   });
 });
 
@@ -59,33 +81,58 @@ describe('EidIllegalArgumentException', function() {
   it('should inherits Error and EidRuntimeException', function() {
     expect(ex instanceof Error).to.be.ok();
     expect(ex instanceof EidRuntimeException).to.be.ok();
+    expect(ex instanceof EidIllegalArgumentException).to.be.ok();
+  });
+  it('should not inherits TypeError or other types of Eid*Exception', function() {
+    expect(ex instanceof TypeError).not.to.be.ok();
+    expect(ex instanceof EidIllegalStateException).not.to.be.ok();
+    expect(ex instanceof EidNullPointerException).not.to.be.ok();
+    expect(ex instanceof EidIndexOutOfBoundsException).not.to.be.ok();
   });
 });
 
 describe('EidIllegalStateException', function() {
-  var ex = new EidIllegalStateException('20160110:230112', 'A null pointer occured!');
+  var ex = new EidIllegalStateException('20160110:230112', 'Illegal state!');
+  var regex = /EidIllegalStateException: \[20160110:230112\]\<[a-z0-9]+\> Illegal state!/;
   it('should contain proper message', function() {
-    expect(ex.toString()).to.match(/EidIllegalStateException: \[20160110:230112\]\<[a-z0-9]+\> A null pointer occured!/);
+    expect(ex.toString()).to.match(regex);
   });
   it('should contain a stack trace', function() {
     expect(ex.stack).to.not.empty();
+    expect(ex.stack).to.match(regex);
   });
   it('should inherits Error and EidRuntimeException', function() {
     expect(ex instanceof Error).to.be.ok();
     expect(ex instanceof EidRuntimeException).to.be.ok();
+    expect(ex instanceof EidIllegalStateException).to.be.ok();
+  });
+  it('should not inherits TypeError or other types of Eid*Exception', function() {
+    expect(ex instanceof TypeError).not.to.be.ok();
+    expect(ex instanceof EidIllegalArgumentException).not.to.be.ok();
+    expect(ex instanceof EidNullPointerException).not.to.be.ok();
+    expect(ex instanceof EidIndexOutOfBoundsException).not.to.be.ok();
   });
 });
 
 describe('EidIndexOutOfBoundsException', function() {
-  var ex = new EidIndexOutOfBoundsException('20160110:230140', 'A null pointer occured!');
+  var ex = new EidIndexOutOfBoundsException('20160110:230140', 'Index is out of bounds!');
+  var regex = /EidIndexOutOfBoundsException: \[20160110:230140\]\<[a-z0-9]+\> Index is out of bounds!/;
   it('should contain proper message', function() {
-    expect(ex.toString()).to.match(/EidIndexOutOfBoundsException: \[20160110:230140\]\<[a-z0-9]+\> A null pointer occured!/);
+    expect(ex.toString()).to.match(regex);
   });
   it('should contain a stack trace', function() {
     expect(ex.stack).to.not.empty();
+    expect(ex.stack).to.match(regex);
   });
   it('should inherits Error and EidRuntimeException', function() {
     expect(ex instanceof Error).to.be.ok();
     expect(ex instanceof EidRuntimeException).to.be.ok();
+    expect(ex instanceof EidIndexOutOfBoundsException).to.be.ok();
+  });
+  it('should not inherits TypeError or other types of Eid*Exception', function() {
+    expect(ex instanceof TypeError).not.to.be.ok();
+    expect(ex instanceof EidIllegalArgumentException).not.to.be.ok();
+    expect(ex instanceof EidIllegalStateException).not.to.be.ok();
+    expect(ex instanceof EidNullPointerException).not.to.be.ok();
   });
 });

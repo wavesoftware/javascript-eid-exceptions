@@ -6,12 +6,12 @@
     <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/twbs/bootstrap/master/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
-    <script type="application/javascript" src="browser/toplevel/eid.min.js"></script>
+    <script type="application/javascript" src="toplevel/eid.min.js"></script>
     <style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=PT+Sans|Source+Code+Pro);
       body {
         font-family: 'PT Sans', sans-serif;
-        font-size: 1.3em;
+        font-size: 1em;
         padding: 1em;
       }
       pre, code {
@@ -38,6 +38,7 @@
 
     <h3>Code:</h3>
     <pre><code class="javascript" id="code">
+    var EidRuntimeException = Eid.exceptions.EidRuntimeException;
     try {
       // Example entity objects
       var users = [];
@@ -61,9 +62,11 @@
       EidPreconditions.checkState(false, '20160111:224215', 'A extra message');
     } catch(e) {
       // Top level of your application
-      log.error(e.toString() + ' - ' + e.stack);
-      // or better save your exceptions!
-      logGateway.put(e, {eid: e.eid});
+      log.error(e.stack);
+      if (e instanceof EidRuntimeException) {
+        // or better save your exceptions!
+        logGateway.put(e, inspectable({eid: e.eid}));
+      }
     }
     </code></pre>
     <h3>Console:</h3>
@@ -93,9 +96,21 @@
         logentry('ERROR', message);
       }
     };
+    var inspectable = function(obj) {
+      obj.toString = function() {
+        var parts = [];
+        for (var k in obj) {
+          if (obj.hasOwnProperty(k) && k !== 'toString') {
+            parts.push(k.toString() + ': ' + obj[k].toString());
+          }
+        }
+        return '{ ' + parts.join(', ') + ' }';
+      };
+      return obj;
+    };
     var logGateway = {
       put: function(ex, extra) {
-        logentry('INFO', 'LogzGetewayFake.io sucessfully PUT an exception: `' + ex.toString() + '` with extra data of: `' + JSON.stringify(extra) + '`');
+        logentry('INFO', 'FakeLogz.io PUT exception: `' + ex.toString() + '`, payload: `' + extra.toString() + '`');
       }
     };
     var code = document.getElementById('code').textContent;

@@ -1,6 +1,6 @@
 {
   "name": "eid.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "EID Runtime Exceptions and Utilities for JS",
   "main": "lib/eid.js",
   "directories": {
