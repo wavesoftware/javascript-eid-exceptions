@@ -35,4 +35,31 @@ import {
 } from "./exceptions";
 import { EidPreconditions } from "./preconditions";
 
+interface EidExceptions {
+  EidRuntimeException: typeof EidRuntimeException;
+  EidNullPointerException: typeof EidNullPointerException;
+  EidIllegalArgumentException: typeof EidIllegalArgumentException;
+  EidIllegalStateException: typeof EidIllegalStateException;
+  EidIndexOutOfBoundsException: typeof EidIndexOutOfBoundsException;
+}
+
+declare module "./eid" {
+  interface Eid {
+    constructor: typeof Eid;
+  }
+  namespace Eid {
+    let preconditions: typeof EidPreconditions;
+    let exceptions: EidExceptions;
+  }
+}
+
+Eid.preconditions = EidPreconditions;
+Eid.exceptions = {
+  EidRuntimeException,
+  EidNullPointerException,
+  EidIllegalArgumentException,
+  EidIllegalStateException,
+  EidIndexOutOfBoundsException,
+};
+
 export default Eid;
