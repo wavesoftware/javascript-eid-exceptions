@@ -26,9 +26,10 @@ class JFormatter {
   }
 
   format(args: unknown[]): string {
-    const regex = /%s/;
-    const reducer = (p: string, c: unknown): string => p.replace(regex, String(c));
-    return args.reduce(reducer, this.template) as string;
+    let i = 0;
+    return this.template.replace(/%s/g, () => {
+      return i < args.length ? String(args[i++]) : "%s";
+    });
   }
 }
 

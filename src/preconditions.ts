@@ -43,7 +43,7 @@ function ensureEid(candidate: string | Eid | null | undefined): Eid {
 }
 
 function isIndexAndSizeIllegal(index: number, size: number): boolean {
-  return index < 0 || index > size;
+  return index < 0 || index >= size;
 }
 
 function isSizeIllegal(size: number): boolean {

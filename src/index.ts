@@ -35,15 +35,4 @@ import {
 } from "./exceptions";
 import { EidPreconditions } from "./preconditions";
 
-// Backward compatibility: attach preconditions and exceptions to Eid
-const preconditions = EidPreconditions;
-const exceptions = {
-  EidRuntimeException,
-  EidNullPointerException,
-  EidIllegalArgumentException,
-  EidIllegalStateException,
-  EidIndexOutOfBoundsException,
-};
-
-export { preconditions, exceptions };
 export default Eid;
